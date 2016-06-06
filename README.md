@@ -2,25 +2,21 @@
 
 > :crystal_ball: Generate empty placeholder data from JSON Schemas
 
-Generating random data is useful for testing, but when it comes to working with forms developers often need empty data to work with.
+Generating random data is useful for testing (try [hazy](https://www.npmjs.com/package/hazy) if you have this need), but developers often need empty placeholder data to work with, particularly when working with web forms.
 
-`empty-schema` fills another niche.  The data it generates
-conforms to the following qualities:
-  - data is generated deterministically, if the schema is the same,
-   the date will be the same.
-  - the data is as simple as possible
-  - the data conforms to the *form* specified in the schema.  It will
-    sometimes fail to be valid according to the schema however.  The reason
-    for this is simple: you cannot generate all values automatically (see the
-    [rules](#rules) section for more info on this).
+The data `empty-schema` generates conforms to the following:
+  - Data is generated deterministically. If the schema is the same, the date will be the same.
+  - Data is as simple as possible.
+  - Data conforms to the *form* specified in the schema.  It will, however, sometimes fail to be valid according to the schema. The reason for this is simple: you cannot generate all values automatically (see the [rules](#rules) section for more info on this).
 
-## Usage
-To install `empty-schema`, run:
+## Installation
+
 ```sh
-npm install empty-schema --save
+npm install --save empty-schema
 ```
 
-The api is simple:
+## Usage
+
 ```js
 import empty from 'empty-schema'
 
@@ -60,7 +56,7 @@ console.log(empty(schema))
     content should be, even when patterns and length limits are given,
     a string schema always results in the empty string: `''`.
 
-  - **integer**: `json-schema-empty` tries to satisfy the `minimum`, `maximum`
+  - **integer**: `empty-schema` tries to satisfy the `minimum`, `maximum`
     and `multipleOf` constraints whenever possible wth the additional property
     that, when it is possible, `0` is returned.
 
@@ -80,7 +76,7 @@ console.log(empty(schema))
   - **null**: always results in `null`.
 
   - **oneOf**, **anyOf**: selects one of the accepted types and goes from there.
-  - **allOf**: `json-schema-empty` merges all schemas and works from that schema
+  - **allOf**: `empty-schema` merges all schemas and works from that schema
     to generate a value.
   - **enum**: selects the first possible value.
   - `$ref`: just works!
@@ -88,6 +84,6 @@ console.log(empty(schema))
 Whenever specified, `empty-schema` uses the `default` value (even if it
 does not match the schema).
 
-### License
+## License
 
-This code is licensed under the [ISC license][license]
+This code is licensed under the ISC License
