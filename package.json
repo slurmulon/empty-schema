@@ -23,6 +23,13 @@
   "contributors": [
     "slurmulon <me@madhax.io>"
   ],
+  "keywords": [
+    "json",
+    "schema",
+    "empty",
+    "form",
+    "placeholder"
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.7.5",
