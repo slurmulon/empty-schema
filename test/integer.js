@@ -1,51 +1,48 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import quickcheck   from 'quick_check';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
 // property that describes valid integers
-var valid = function(min, limit, multipleOf, exclusive) {
-  if ( multipleOf === 0 ) { return undefined; }
+function valid(min, limit, multipleOf, exclusive) {
+  if (multipleOf === 0) { 
+    return
+  }
 
-  min = false;
+  min = false
   // min or max?
-  var ix = min ? 'in' : 'ax';
+  const ix = min ? 'in' : 'ax'
 
-  var schema = {
-    type: 'integer'
-  , [`m${ix}imum`]: limit
-  , multipleOf
-  , [`exclusiveM${ix}imum`]: exclusive
-  };
+  const schema = {
+    type: 'integer',
+    [`m${ix}imum`]: limit,
+    multipleOf,
+    [`exclusiveM${ix}imum`]: exclusive
+  }
 
-  var gen = empty(schema);
+  const gen = empty(schema)
 
   // gen should be multipleOf
-  var multiple = ( gen % multipleOf === 0 );
+  const multiple = ( gen % multipleOf === 0 )
 
   // gen should comply to limits
-  var small = min ? limit : gen;
-  var big   = min ? gen   : limit;
+  const small  = min ? limit : gen
+  const big    = min ? gen   : limit
+  const limits = ( small < big ) || ( !exclusive && small <= big )
 
-  var limits = ( small < big ) || ( !exclusive && small <= big );
+  const res = multiple && limits
 
-  var res = multiple && limits;
-
-  if ( !res ) {
-    console.log(schema, gen, multiple, limits);
+  if (!res) {
+    console.log(schema, gen, multiple, limits)
   }
-  return res;
-};
 
-var validminmax = function([minimum, maximum], exclusiveMinimum, exclusiveMaximum) {
+  return res
+}
+
+function validMinMax([minimum, maximum], exclusiveMinimum, exclusiveMaximum) {
   // avoid impossible case
   if ( minimum === maximum && (exclusiveMinimum || exclusiveMaximum)) {
-    return undefined;
+    return undefined
   }
 
   var schema = {
@@ -54,204 +51,192 @@ var validminmax = function([minimum, maximum], exclusiveMinimum, exclusiveMaximu
   , maximum
   , exclusiveMinimum
   , exclusiveMaximum
-  };
-
-  var gen = empty(schema);
-
-  var min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum);
-  var max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum);
-
-  var res = min && max;
-  if ( !res ) {
-    console.log(schema, gen, min, max);
   }
-  return res;
-};
+
+  var gen = empty(schema)
+
+  var min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum)
+  var max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum)
+
+  var res = min && max
+  if ( !res ) {
+    console.log(schema, gen, min, max)
+  }
+  return res
+}
 
 
 describe('integers', function() {
-  it('should generate correct multiples', function(done) {
-    var res =
-      quickcheck(valid, quickcheck.bool
-                      , quickcheck.int.between(-10000, 10000)
-                      , quickcheck.int.between(-15, 15)
-                      , quickcheck.bool);
-      expect(res.pass).to.equal(true);
-      done();
-  });
+  // it('should generate correct multiples', function(done) {
+  //   var res =
+  //     quickcheck(valid, quickcheck.bool
+  //                     , quickcheck.int.between(-10000, 10000)
+  //                     , quickcheck.int.between(-15, 15)
+  //                     , quickcheck.bool)
+  //     expect(res.pass).to.equal(true)
+  //     done()
+  // })
 
-  it('should generate in the correct range', function(done) {
-    var res =
-      quickcheck(validminmax, quickcheck.range(quickcheck.int.between(-10000, 10000))
-                            , quickcheck.bool
-                            , quickcheck.bool);
+  // it('should generate in the correct range', function(done) {
+  //   var res =
+  //     quickcheck(validMinMax, quickcheck.range(quickcheck.int.between(-10000, 10000))
+  //                           , quickcheck.bool
+  //                           , quickcheck.bool)
 
-      expect(res.pass).to.equal(true);
-      done();
-  });
+  //     expect(res.pass).to.equal(true)
+  //     done()
+  // })
 
   it('should return 0 when no constraints are given', function(done) {
-    var schema = {
+    const schema = {
       type: 'integer'
-    };
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(0);
+    empty(schema).should.equal(0)
 
-    done();
-  });
+    done()
+  })
 
   it('should return minimum if divisible by multipleOf', function(done) {
-    var schema = {
-      type: 'integer'
-    , minimum: 10
-    , multipleOf: 2
-    };
+    const schema = {
+      type: 'integer',
+      minimum: 10,
+      multipleOf: 2
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(10);
+    empty(schema).should.equal(10)
 
-    done();
-  });
+    done()
+  })
 
   it('should return min if min, max and multiple are given', function(done) {
-    var schema = {
-      type: 'integer'
-    , minimum: 10
-    , maximum: 20
-    , multipleOf: 2
-    };
+    const schema = {
+      type: 'integer',
+      minimum: 10,
+      maximum: 20,
+      multipleOf: 2
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(10);
-    done();
-  });
+    empty(schema).should.equal(10)
+
+    done()
+  })
 
   it('should return min if min, max and multiple are given and 0 is not in range', function(done) {
-    var schema = {
-      type: 'integer'
-    , minimum: 10
-    , maximum: 20
-    , multipleOf: 2
-    };
+    const schema = {
+      type: 'integer',
+      minimum: 10,
+      maximum: 20,
+      multipleOf: 2
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(10);
-    done();
-  });
+    empty(schema).should.equal(10)
+
+    done()
+  })
 
   it('should return min if min, max and multiple are given', function(done) {
-    var schema = {
-      type: 'integer'
-    , minimum: -10
-    , maximum: 20
-    , multipleOf: 2
-    };
+    const schema = {
+      type: 'integer',
+      minimum: -10,
+      maximum: 20,
+      multipleOf: 2
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(0);
-    done();
-  });
+    empty(schema).should.equal(0)
+
+    done()
+  })
 
   it('should return 0 if only multipleOf is given', function(done) {
-    var schema = {
-      type: 'integer'
-    , multipleOf: 2
-    };
+    const schema = {
+      type: 'integer',
+      multipleOf: 2
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(0);
-    done();
-  });
+    empty(schema).should.equal(0)
+
+    done()
+  })
 
   it('should return 0 if maximum allows it', function(done) {
-    var schema = {
-      type: 'integer'
-    , multipleOf: 2
-    , maximum: 10
-    };
+    const schema = {
+      type: 'integer',
+      multipleOf: 2,
+      maximum: 10
+    }
 
-    expect(empty(schema)).to
-      .equal(0);
-    done();
-  });
+    empty(schema).should.equal(0)
+
+    done()
+  })
 
   it('should work with only minimum', function(done) {
-    expect(empty({
-      type: 'integer'
-    , minimum: 5
-    })).to
-      .deep.equal(5);
+    empty({
+      type: 'integer',
+      minimum: 5
+    }).should.equal(5)
 
-    expect(empty({
-      type: 'integer'
-    , minimum: -5
-    , exclusiveMinimum: true
-    })).to
-      .deep.equal(0);
+    empty({
+      type: 'integer',
+      minimum: -5,
+      exclusiveMinimum: true
+    }).should.equal(0)
 
-    expect(empty({
-      type: 'integer'
-    , minimum: -5
-    })).to
-      .deep.equal(0);
+    empty({
+      type: 'integer',
+      minimum: -5
+    }).should.equal(0)
 
-    expect(empty({
-      type: 'integer'
-    , minimum: 5
-    , exclusiveMinimum: true
-    })).to
-      .deep.equal(6);
+    empty({
+      type: 'integer',
+      minimum: 5,
+      exclusiveMinimum: true
+    }).should.equal(6)
 
-    done();
-  });
+    done()
+  })
 
   it('should work with only maximum', function(done) {
-    expect(empty({
-      type: 'integer'
-    , maximum: 5
-    })).to
-      .deep.equal(0);
+    empty({
+      type: 'integer',
+      maximum: 5
+    }).should.equal(0)
 
-    expect(empty({
-      type: 'integer'
-    , maximum: 5
-    , exclusiveMaximum: true
-    })).to
-      .deep.equal(0);
+    empty({
+      type: 'integer',
+      maximum: 5,
+      exclusiveMaximum: true
+    }).should.equal(0)
 
-    expect(empty({
-      type: 'integer'
-    , maximum: 5
-    })).to
-      .deep.equal(0);
+    empty({
+      type: 'integer',
+      maximum: 5
+    }).should.equal(0)
 
-    expect(empty({
-      type: 'integer'
-    , maximum: -5
-    , exclusiveMaximum: true
-    })).to
-      .deep.equal(-6);
+    empty({
+      type: 'integer',
+      maximum: -5,
+      exclusiveMaximum: true
+    }).should.equal(-6)
 
-    expect(empty({
+    empty({
       type: 'integer'
     , maximum: -5
-    })).to
-      .deep.equal(-5);
+    }).should.equal(-5)
 
-    done();
-  });
+    done()
+  })
 
   it('should work with default', function(done) {
-    var schema = {
-      type: 'integer'
-    , default: 42
-    };
+    const schema = {
+      type: 'integer',
+      default: 42
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(42);
+    empty(schema).should.equal(42)
 
-    done();
-  });
-});
+    done()
+  })
+})
 

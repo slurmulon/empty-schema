@@ -1,71 +1,64 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
+describe('object schema definition', () => {
 
-describe('object schema definition', function() {
-
-  it('should create the empty object when no required fields are given', function(done) {
-    var schema = {
+  it('should create the empty object when no required fields are given', (done) => {
+    const schema = {
       type: 'object'
-    };
-    expect(empty(schema)).to
-      .deep.equal({});
+    }
 
-    done();
-  });
+    empty(schema).should.deep.equal({})
 
-  it('should create the fields when they are required', function(done) {
-    var schema = {
-      type: 'object'
-    , properties: {
+    done()
+  })
+
+  it('should create the fields when they are required', (done) => {
+    const schema = {
+      type: 'object',
+      properties: {
         foo: {
           type: 'object'
-        }
-      , bar: {
+        },
+        bar: {
           type: 'object'
         }
-      }
-    , required: ['foo', 'bar']
-    };
-    expect(empty(schema)).to
-      .contain.all.keys(['foo', 'bar']);
+      },
+      required: ['foo', 'bar']
+    }
 
-    done();
-  });
+    empty(schema).should.have.keys(['foo', 'bar'])
 
-  it('should work with default', function(done) {
-    var def = {
-      foo: 'bar'
-    , baz: 42
-    };
+    done()
+  })
 
-    var schema = {
-      type: 'object'
-    , default: def
-    };
+  it('should work with default', (done) => {
+    const def = {
+      foo: 'bar',
+      baz: 42
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(def);
+    const schema = {
+      type: 'object',
+      default: def
+    }
 
-    done();
-  });
+    empty(schema).should.deep.equal(def)
 
-  it('should error when required object property is not given', function(done) {
-    var f = function() {
-      empty({
-        type: 'object'
-      , properties: {}
-      , required: ['foo']
-      });
-    };
+    done()
+  })
 
-    expect(f).to.throw(Error);
-    done();
-  });
-});
+  xit('should error when required object property is not given', (done) => {
+    const func = () => empty({
+      type: 'object',
+      properties: {},
+      required: ['foo']
+    });
+
+    (func()).should.Throw(Error)
+
+    done()
+  })
+})

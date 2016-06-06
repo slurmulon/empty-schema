@@ -1,34 +1,28 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-describe('string schema definition', function() {
+describe('string schema definition', () => {
 
-  it('string schema should yield empty string', function(done) {
-    var schema = {
+  it('string schema should yield empty string', (done) => {
+    const schema = {
       type: 'string'
-    };
+    }
 
-    expect(empty(schema)).to
-      .deep.equal('');
+    empty(schema).should.equal('')
 
-    done();
-  });
+    done()
+  })
 
-  it('string schema with default should work', function(done) {
-    var schema = {
-      type: 'string'
-    , default: 'foo'
-    };
+  it('string schema with default should work', (done) => {
+    const schema = {
+      type: 'string',
+      default: 'foo'
+    }
 
-    expect(empty(schema)).to
-      .deep.equal('foo');
+    empty(schema).should.equal('foo')
 
-    done();
-  });
-});
+    done()
+  })
+})

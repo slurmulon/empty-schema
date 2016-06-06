@@ -1,41 +1,37 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
 describe('array schema definition', function() {
 
   it('should yield empty array', function(done) {
-    expect(empty({
+    empty({
       type: 'array'
-    })).to.deep.equal([]);
+    }).should.deep.equal([])
 
-    done();
-  });
+    done()
+  })
 
   it('should work with tuples', function(done) {
-    expect(empty({
-      type: 'array'
-    , items: [
-        { type: 'integer' }
-      , { type: 'string' }
+    empty({
+      type: 'array',
+      items: [
+        { type: 'integer' },
+        { type: 'string' }
       ]
-    })).to.deep.equal([0, '']);
+    }).should.deep.equal([0, ''])
 
-    done();
-  });
+    done()
+  })
 
   it('should work with minItems', function(done) {
-    expect(empty({
-      type: 'array'
-    , items:{ type: 'integer' }
-    , minItems: 5
-    })).to.deep.equal([0, 0, 0, 0, 0]);
+    empty({
+      type: 'array',
+      items:{ type: 'integer' },
+      minItems: 5
+    }).should.deep.equal([0, 0, 0, 0, 0])
 
-    done();
-  });
-});
+    done()
+  })
+})

@@ -1,38 +1,30 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-var throwing = function(schema, err = Error) {
-  var f = function() {
-    return empty(schema);
-  };
-
-  expect(f).to.throw(err);
-};
+function throwing(schema, err = Error) {
+  (() => empty(schema)).should.Throw(err)
+}
 
 
-describe('errors', function() {
+describe('errors', () => {
 
-  it('should error on unknown type', function(done) {
+  it('should error on unknown type', (done) => {
     throwing({
       type: 'bla'
-    });
-    done();
-  });
+    })
+    done()
+  })
 
-  it('should error when no schema is passed', function(done) {
-    throwing();
-    done();
-  });
+  it('should error when no schema is passed', (done) => {
+    throwing()
+    done()
+  })
 
-  it('should throw when invalid schema is passed', function(done) {
-    throwing({});
-    done();
-  });
+  it('should throw when invalid schema is passed', (done) => {
+    throwing({})
+    done()
+  })
 
-});
+})

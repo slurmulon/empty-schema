@@ -1,56 +1,47 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-describe('meta properties', function() {
+describe('meta properties', () => {
   it('should work with oneOf', function(done) {
-    var schema = {
+    const schema = {
       oneOf: [ {type: 'integer'}, {type: 'string'} ]
-    };
+    }
 
-    expect(empty(schema)).to
-      .equal(0);
+    empty(schema).should.equal(0)
 
-    done();
-  });
+    done()
+  })
 
   it('should work with anyOf', function(done) {
-    var schema = {
+    const schema = {
       anyOf: [ {type: 'integer'}, {type: 'string'} ]
-    };
+    }
 
-    expect(empty(schema)).to
-      .equal(0);
+    empty(schema).should.equal(0)
 
-    done();
-  });
+    done()
+  })
 
   it('should work with allOf', function(done) {
-    var schema = {
+    const schema = {
       allOf: [ {type: 'integer'}, {minimum: 5} ]
-    };
+    }
 
-    expect(empty(schema)).to
-      .equal(5);
+    empty(schema).should.equal(5)
 
-    done();
-  });
+    done()
+  })
 
   it('should work for type unions', function(done) {
-    var schema = {
+    const schema = {
       type: [ 'integer', 'string' ]
-    };
+    }
 
-    expect(empty(schema)).to
-      .equal(0);
+    empty(schema).should.equal(0)
 
-    done();
-
-  });
-});
+    done()
+  })
+})
 

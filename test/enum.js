@@ -1,24 +1,19 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-describe('enum schema definition', function() {
+describe('enum schema definition', () => {
 
-  it('should yield first enum value', function(done) {
-    var schema = {
+  it('should yield first enum value', (done) => {
+    const schema = {
       enum: [
         42
       ]
-    };
+    }
 
-    expect(empty(schema)).to
-      .equal(42);
+    empty(schema).should.equal(42)
 
-    done();
-  });
-});
+    done()
+  })
+})

@@ -1,22 +1,17 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai  from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-describe('null schema definition', function() {
+describe('null schema definition', () => {
 
-  it('should yield null', function(done) {
-    var schema = {
+  it('should yield null', (done) => {
+    const schema = {
       type: 'null'
-    };
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(null);
+    chai.should(empty(schema)).not.exist()
 
-    done();
-  });
-});
+    done()
+  })
+})

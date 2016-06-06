@@ -1,34 +1,28 @@
-import empty        from '../src';
-import { expect }   from './instrument';
-import Lab          from 'lab';
+import empty from '../src/empty'
+import chai from 'chai'
 
-var lab = Lab.script();
-var { describe
-    , it } = lab;
-export { lab };
+chai.should()
 
-describe('boolean schema definition', function() {
+describe('boolean schema definition', () => {
 
-  it('should yield false', function(done) {
-    var schema = {
+  it('should yield false', (done) => {
+    const schema = {
       type: 'boolean'
-    };
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(false);
+    empty(schema).should.equal(false)
 
-    done();
-  });
+    done()
+  })
 
-  it('should work with default', function(done) {
-    var schema = {
-      type: 'boolean'
-    , default: true
-    };
+  it('should work with default', (done) => {
+    const schema = {
+      type: 'boolean',
+      default: true
+    }
 
-    expect(empty(schema)).to
-      .deep.equal(true);
+    empty(schema).should.equal(true)
 
-    done();
-  });
-});
+    done()
+  })
+})
