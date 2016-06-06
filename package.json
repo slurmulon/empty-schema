@@ -46,6 +46,6 @@
     "mocha": "^2.3.2"
   },
   "dependencies": {
-    "simple-json-schema-deref": "^0.1.0"
+    "deref": "^0.6.4"
   }
 }
