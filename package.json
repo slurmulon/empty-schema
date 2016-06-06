@@ -1,7 +1,7 @@
 {
   "name": "empty-schema",
   "version": "0.0.1",
-  "description": "Generate empty placeholder objects from JSON Schemas",
+  "description": "Generate empty placeholder data from JSON Schemas",
   "main": "dist/index.js",
   "scripts": {
     "build": "node ./node_modules/.bin/babel src --out-dir lib",
@@ -19,7 +19,10 @@
     "type": "git",
     "url": "https://github.com/slurmulon/empty-schema.git"
   },
-  "author": "slurmulon",
+  "author": "Romeo Van Snick <romeovs@gmail.com>",
+  "contributors": [
+    "slurmulon <me@madhax.io>"
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.7.5",
