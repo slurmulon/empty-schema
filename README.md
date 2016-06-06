@@ -18,7 +18,7 @@ npm install --save empty-schema
 ## Usage
 
 ```js
-import empty from 'empty-schema'
+import {empty} from 'empty-schema'
 
 const schema = {
   type: 'object',

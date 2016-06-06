@@ -15,7 +15,7 @@ import _string from './string'
  * @param {Array<Object>} schema JSON Schema
  * @param Object [global]
  */
-export default function empty(schema, global) {
+export default function _empty(schema, global) {
   const {
     type, 
     'default': default_,
@@ -33,7 +33,7 @@ export default function empty(schema, global) {
   // } else if ($ref) {
   //   // a ref is passed, deref it and go on from there
   //   var s = deref($ref, global)
-  //   return empty(s, global)
+  //   return _empty(s, global)
   } else if (type) {
     let kind
 
@@ -69,11 +69,11 @@ export default function empty(schema, global) {
         throw new Error(`cannot create value of type ${type}`)
     }
   } else if (allOf) {
-    return empty(merge(allOf), global)
+    return _empty(merge(allOf), global)
   } else if (anyOf) {
-    return empty(anyOf[0], global)
+    return _empty(anyOf[0], global)
   } else if ( oneOf ) {
-    return empty(oneOf[0], global)
+    return _empty(oneOf[0], global)
   } else {
     throw new Error(`cannot generate data from schema ${schema}`)
   }

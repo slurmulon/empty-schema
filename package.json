@@ -2,7 +2,7 @@
   "name": "empty-schema",
   "version": "0.0.4",
   "description": "Generate empty placeholder data from JSON Schemas",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "node ./node_modules/.bin/babel src --out-dir lib",
     "build-maps": "node ./node_modules/.bin/babel src --out-dir lib --source-maps",

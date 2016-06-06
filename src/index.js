@@ -1,5 +1,7 @@
 import deref from 'simple-json-schema-deref'
+import _empty       from './empty'
 
+export { _empty }   from './empty'
 export { _array }   from './array'
 export { _boolean } from './boolean'
 export { _integer } from './integer'
@@ -9,8 +11,10 @@ export { _object }  from './object'
 export { _string }  from './string'
 export { merge }    from './merge'
 
-export default function(schema) {
+export const empty = (schema) => {
   const denormed = deref(schema)
 
-  return empty(denormed, denormed)
+  return _empty(denormed, denormed)
 }
+
+export { empty as default }
