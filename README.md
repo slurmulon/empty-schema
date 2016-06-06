@@ -1,21 +1,10 @@
-# json-schema-empty
+# empty-schema
 
-[![Build Status](https://img.shields.io/travis/romeovs/json-schema-empty.svg?style=flat-square)][travis]
-[![Coverage Status](https://img.shields.io/coveralls/romeovs/json-schema-empty.svg?style=flat-square)][coveralls]
-[![Dependencies](https://img.shields.io/david/romeovs/json-schema-empty.svg?style=flat-square)][david]
-[![devDependencies](https://img.shields.io/david/dev/romeovs/json-schema-empty.svg?style=flat-square)][david-dev]
-[![license](https://img.shields.io/badge/license-ISC-373737.svg?style=flat-square)][license]
-[![gitter](https://img.shields.io/badge/GITTER-join%20chat%20→-00d86e.svg?style=flat-square)][gitter]
+> :crystal_ball: Generate empty placeholder data from JSON Schemas
 
+Generating random data is useful for testing, but when it comes to working with forms developers often need empty data to work with.
 
-Generate simple data that matches a json schema.
-
-All libraries that generate data from a json-schema I could find
-generate random data that conforms to a json schema.  This is nice
-for testing but is not well-suited for generating default data for
-forms for example.
-
-`json-schema-empty` fills another niche.  The data it generates
+`empty-schema` fills another niche.  The data it generates
 conforms to the following qualities:
   - data is generated deterministically, if the schema is the same,
    the date will be the same.
@@ -26,39 +15,38 @@ conforms to the following qualities:
     [rules](#rules) section for more info on this).
 
 ## Usage
-To install `json-schema-empty`, run:
+To install `empty-schema`, run:
 ```sh
-npm install romeovs/json-schema-empty --save
+npm install empty-schema --save
 ```
 
 The api is simple:
 ```js
-import empty from 'json-schema-empty';
+import empty from 'empty-schema'
 
-var schema = {
-  type: 'object'
-, properties: {
+const schema = {
+  type: 'object',
+  properties: {
     foo: {
-      type: 'integer'
-    , minimum: 12
-    , multipleOf: 5
-    }
-  , bar: {
-      type: 'array'
-    , items: { type: 'integer' }
-    , minItems: 3
-    }
-  , baz: {
-      type: 'string'
+      type: 'integer',
+      minimum: 12,
+      multipleOf: 5
+    },
+    bar: {
+      type: 'array',
+      items: { type: 'integer' },
+      minItems: 3
+    },
+    baz: {
+      type: 'string',
       minLength: 5
     }
-  }
-, required: [ 'foo', 'bar', 'baz' ]
-};
+  },
+  required: [ 'foo', 'bar', 'baz' ]
+}
 
-console.log(empty(schema));
+console.log(empty(schema))
 
-// logs:
 // {
 //   foo: 15,
 //   bar: [ 0, 0, 0 ],
@@ -97,15 +85,9 @@ console.log(empty(schema));
   - **enum**: selects the first possible value.
   - `$ref`: just works!
 
-Whenever specified, `json-schema-empty` uses the `default` value (even if it
+Whenever specified, `empty-schema` uses the `default` value (even if it
 does not match the schema).
 
 ### License
-This code is licensed under the [ISC license][license]
 
-[travis]:    https://travis-ci.org/romeovs/json-schema-empty
-[coveralls]: https://coveralls.io/r/romeovs/json-schema-empty?branch=master
-[david]:     https://david-dm.org/romeovs/json-schema-empty
-[david-dev]: https://david-dm.org/romeovs/json-schema-empty#info=devDependencies
-[license]:   ./LICENSE
-[gitter]:    https://gitter.im/romeovs/json-schema-empty?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+This code is licensed under the [ISC license][license]
