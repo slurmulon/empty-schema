@@ -5,7 +5,7 @@ chai.should()
 
 describe('enum schema definition', () => {
 
-  it('should yield first enum value', (done) => {
+  it('should yield first enum value', () => {
     const schema = {
       enum: [
         42
@@ -13,7 +13,5 @@ describe('enum schema definition', () => {
     }
 
     empty(schema).should.equal(42)
-
-    done()
   })
 })

@@ -5,13 +5,11 @@ chai.should()
 
 describe('null schema definition', () => {
 
-  it('should yield null', (done) => {
+  it('should yield null', () => {
     const schema = {
       type: 'null'
     }
 
     chai.should(empty(schema)).not.exist()
-
-    done()
   })
 })

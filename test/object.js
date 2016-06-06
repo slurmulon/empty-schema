@@ -5,17 +5,15 @@ chai.should()
 
 describe('object schema definition', () => {
 
-  it('should create the empty object when no required fields are given', (done) => {
+  it('should create the empty object when no required fields are given', () => {
     const schema = {
       type: 'object'
     }
 
     empty(schema).should.deep.equal({})
-
-    done()
   })
 
-  it('should create the fields when they are required', (done) => {
+  it('should create the fields when they are required', () => {
     const schema = {
       type: 'object',
       properties: {
@@ -30,11 +28,9 @@ describe('object schema definition', () => {
     }
 
     empty(schema).should.have.keys(['foo', 'bar'])
-
-    done()
   })
 
-  it('should work with default', (done) => {
+  it('should work with default', () => {
     const def = {
       foo: 'bar',
       baz: 42
@@ -46,11 +42,9 @@ describe('object schema definition', () => {
     }
 
     empty(schema).should.deep.equal(def)
-
-    done()
   })
 
-  xit('should error when required object property is not given', (done) => {
+  xit('should error when required object property is not given', () => {
     const func = () => empty({
       type: 'object',
       properties: {},
@@ -58,7 +52,5 @@ describe('object schema definition', () => {
     });
 
     (func()).should.Throw(Error)
-
-    done()
   })
 })

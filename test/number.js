@@ -3,30 +3,26 @@ import chai  from 'chai'
 
 chai.should()
 
-describe('numbers', function() {
+describe('numbers', () => {
 
-  it('should return 0 when possible', function(done) {
+  it('should return 0 when possible', () => {
     const schema = {
       type: 'number'
     }
 
     empty(schema).should.equal(0)
-
-    done()
   })
 
-  it('should use default', function(done) {
+  it('should use default', () => {
     const schema = {
       type: 'number',
       default: 42
     }
 
     empty(schema).should.equal(42)
-
-    done()
   })
 
-  it('should work with non-integer multipleOf', function(done) {
+  it('should work with non-integer multipleOf', () => {
     const schema = {
       type: 'number',
       multipleOf: 3.5,
@@ -34,8 +30,6 @@ describe('numbers', function() {
     }
 
     empty(schema).should.equal(7)
-
-    done()
   })
 
 })

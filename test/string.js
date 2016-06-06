@@ -5,24 +5,20 @@ chai.should()
 
 describe('string schema definition', () => {
 
-  it('string schema should yield empty string', (done) => {
+  it('string schema should yield empty string', () => {
     const schema = {
       type: 'string'
     }
 
     empty(schema).should.equal('')
-
-    done()
   })
 
-  it('string schema with default should work', (done) => {
+  it('string schema with default should work', () => {
     const schema = {
       type: 'string',
       default: 'foo'
     }
 
     empty(schema).should.equal('foo')
-
-    done()
   })
 })

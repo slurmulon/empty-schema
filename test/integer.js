@@ -41,63 +41,61 @@ function valid(min, limit, multipleOf, exclusive) {
 
 function validMinMax([minimum, maximum], exclusiveMinimum, exclusiveMaximum) {
   // avoid impossible case
-  if ( minimum === maximum && (exclusiveMinimum || exclusiveMaximum)) {
+  if (minimum === maximum && (exclusiveMinimum || exclusiveMaximum)) {
     return undefined
   }
 
-  var schema = {
-    type: 'integer'
-  , minimum
-  , maximum
-  , exclusiveMinimum
-  , exclusiveMaximum
+  const schema = {
+    type: 'integer',
+    minimum,
+    maximum,
+    exclusiveMinimum,
+    exclusiveMaximum
   }
 
-  var gen = empty(schema)
+  const gen = empty(schema)
 
-  var min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum)
-  var max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum)
+  const min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum)
+  const max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum)
 
-  var res = min && max
-  if ( !res ) {
+  const res = min && max
+
+  if (!res) {
     console.log(schema, gen, min, max)
   }
+
   return res
 }
 
 
-describe('integers', function() {
-  // it('should generate correct multiples', function(done) {
+describe('integers', () => {
+  // it('should generate correct multiples', () => {
   //   var res =
   //     quickcheck(valid, quickcheck.bool
   //                     , quickcheck.int.between(-10000, 10000)
   //                     , quickcheck.int.between(-15, 15)
   //                     , quickcheck.bool)
   //     expect(res.pass).to.equal(true)
-  //     done()
   // })
 
-  // it('should generate in the correct range', function(done) {
+  // it('should generate in the correct range', () => {
   //   var res =
   //     quickcheck(validMinMax, quickcheck.range(quickcheck.int.between(-10000, 10000))
   //                           , quickcheck.bool
   //                           , quickcheck.bool)
 
   //     expect(res.pass).to.equal(true)
-  //     done()
   // })
 
-  it('should return 0 when no constraints are given', function(done) {
+  it('should return 0 when no constraints are given', () => {
     const schema = {
       type: 'integer'
     }
 
     empty(schema).should.equal(0)
-
-    done()
   })
 
-  it('should return minimum if divisible by multipleOf', function(done) {
+  it('should return minimum if divisible by multipleOf', () => {
     const schema = {
       type: 'integer',
       minimum: 10,
@@ -105,11 +103,9 @@ describe('integers', function() {
     }
 
     empty(schema).should.equal(10)
-
-    done()
   })
 
-  it('should return min if min, max and multiple are given', function(done) {
+  it('should return min if min, max and multiple are given', () => {
     const schema = {
       type: 'integer',
       minimum: 10,
@@ -118,11 +114,9 @@ describe('integers', function() {
     }
 
     empty(schema).should.equal(10)
-
-    done()
   })
 
-  it('should return min if min, max and multiple are given and 0 is not in range', function(done) {
+  it('should return min if min, max and multiple are given and 0 is not in range', () => {
     const schema = {
       type: 'integer',
       minimum: 10,
@@ -131,11 +125,9 @@ describe('integers', function() {
     }
 
     empty(schema).should.equal(10)
-
-    done()
   })
 
-  it('should return min if min, max and multiple are given', function(done) {
+  it('should return min if min, max and multiple are given', () => {
     const schema = {
       type: 'integer',
       minimum: -10,
@@ -144,22 +136,18 @@ describe('integers', function() {
     }
 
     empty(schema).should.equal(0)
-
-    done()
   })
 
-  it('should return 0 if only multipleOf is given', function(done) {
+  it('should return 0 if only multipleOf is given', () => {
     const schema = {
       type: 'integer',
       multipleOf: 2
     }
 
     empty(schema).should.equal(0)
-
-    done()
   })
 
-  it('should return 0 if maximum allows it', function(done) {
+  it('should return 0 if maximum allows it', () => {
     const schema = {
       type: 'integer',
       multipleOf: 2,
@@ -167,11 +155,9 @@ describe('integers', function() {
     }
 
     empty(schema).should.equal(0)
-
-    done()
   })
 
-  it('should work with only minimum', function(done) {
+  it('should work with only minimum', () => {
     empty({
       type: 'integer',
       minimum: 5
@@ -193,11 +179,9 @@ describe('integers', function() {
       minimum: 5,
       exclusiveMinimum: true
     }).should.equal(6)
-
-    done()
   })
 
-  it('should work with only maximum', function(done) {
+  it('should work with only maximum', () => {
     empty({
       type: 'integer',
       maximum: 5
@@ -221,22 +205,18 @@ describe('integers', function() {
     }).should.equal(-6)
 
     empty({
-      type: 'integer'
-    , maximum: -5
+      type: 'integer',
+      maximum: -5
     }).should.equal(-5)
-
-    done()
   })
 
-  it('should work with default', function(done) {
+  it('should work with default', () => {
     const schema = {
       type: 'integer',
       default: 42
     }
 
     empty(schema).should.equal(42)
-
-    done()
   })
 })
 

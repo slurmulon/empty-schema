@@ -3,9 +3,9 @@ import chai from 'chai'
 
 chai.should()
 
-describe('array schema definition', function() {
+describe('array schema definition', () => {
 
-  it('should yield empty array', function(done) {
+  it('should yield empty array', (done) => {
     empty({
       type: 'array'
     }).should.deep.equal([])
@@ -13,7 +13,7 @@ describe('array schema definition', function() {
     done()
   })
 
-  it('should work with tuples', function(done) {
+  it('should work with tuples', (done) => {
     empty({
       type: 'array',
       items: [
@@ -25,7 +25,7 @@ describe('array schema definition', function() {
     done()
   })
 
-  it('should work with minItems', function(done) {
+  it('should work with minItems', (done) => {
     empty({
       type: 'array',
       items:{ type: 'integer' },

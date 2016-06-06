@@ -7,24 +7,20 @@ function throwing(schema, err = Error) {
   (() => empty(schema)).should.Throw(err)
 }
 
-
 describe('errors', () => {
 
-  it('should error on unknown type', (done) => {
+  it('should error on unknown type', () => {
     throwing({
       type: 'bla'
     })
-    done()
   })
 
-  it('should error when no schema is passed', (done) => {
+  it('should error when no schema is passed', () => {
     throwing()
-    done()
   })
 
-  it('should throw when invalid schema is passed', (done) => {
+  it('should throw when invalid schema is passed', () => {
     throwing({})
-    done()
   })
 
 })
