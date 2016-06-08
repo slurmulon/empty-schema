@@ -1,4 +1,4 @@
-import deref from 'simple-json-schema-deref'
+import deref from 'deref'
 import merge from './merge'
 
 import _array from './array'
