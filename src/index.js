@@ -1,5 +1,5 @@
-import deref from 'deref'
-import _empty       from './empty'
+import deref  from 'deref'
+import _empty from './empty'
 
 export { _empty }   from './empty'
 export { _array }   from './array'
@@ -12,7 +12,7 @@ export { _string }  from './string'
 export { merge }    from './merge'
 
 export const empty = (schema, refs) => {
-  const denormed = deref(schema, refs)
+  const denormed = deref()(schema, refs, true)
 
   return _empty(denormed, denormed)
 }
