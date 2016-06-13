@@ -1,4 +1,4 @@
-import deref  from 'deref'
+import deref  from 'simple-json-schema-deref'
 import _empty from './empty'
 
 export { _empty }   from './empty'
@@ -11,8 +11,8 @@ export { _object }  from './object'
 export { _string }  from './string'
 export { merge }    from './merge'
 
-export const empty = (schema, refs) => {
-  const denormed = deref()(schema, refs, true)
+export const empty = (schema) => {
+  const denormed = deref(schema)
 
   return _empty(denormed, denormed)
 }

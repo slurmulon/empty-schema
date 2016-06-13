@@ -1,4 +1,4 @@
-import deref from 'deref'
+import deref from 'simple-json-schema-deref'
 import merge from './merge'
 
 import _array from './array'
@@ -31,7 +31,7 @@ export default function _empty(schema, global) {
   } else if (enum_) {
     return enum_[0]
   } else if ($ref) {
-    const derefed = deref()($ref, global)
+    const derefed = deref($ref, global)
     return _empty(derefed, global)
   } else if (type) {
     let kind
