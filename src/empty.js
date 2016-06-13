@@ -20,7 +20,7 @@ export default function _empty(schema, global) {
     type, 
     'default': default_,
     'enum':    enum_,
-    // $ref, 
+    $ref,
     oneOf,
     anyOf,
     allOf
@@ -30,10 +30,9 @@ export default function _empty(schema, global) {
     return default_
   } else if (enum_) {
     return enum_[0]
-  // } else if ($ref) {
-  //   // a ref is passed, deref it and go on from there
-  //   var s = deref($ref, global)
-  //   return _empty(s, global)
+  } else if ($ref) {
+    const derefed = deref()($ref, global)
+    return _empty(derefed, global)
   } else if (type) {
     let kind
 
