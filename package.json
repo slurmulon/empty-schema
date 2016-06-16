@@ -4,16 +4,14 @@
   "description": "Generate empty placeholder data from JSON Schemas",
   "main": "lib/index.js",
   "scripts": {
-    "build": "node ./node_modules/.bin/babel src --out-dir lib",
-    "build-maps": "node ./node_modules/.bin/babel src --out-dir lib --source-maps",
+    "build": "babel src --out-dir lib",
+    "build-maps": "babel src --out-dir lib --source-maps",
     "lint": "eslint src/index.js",
-    "start": "./node_modules/.bin/babel-node src/index.js",
+    "start": "babel-node src/index.js",
     "pretest": "npm run build",
-    "test": "node ./node_modules/.bin/mocha --reporter nyan --compilers js:babel-core/register test",
+    "test": "mocha --reporter nyan --compilers js:babel-core/register test",
     "auto-start": "nodemon --exec \"npm run lint && npm start\" --ignore public/js",
-    "preinstall": "npm install --ignore-scripts && npm run build",
-    "prepublish": "npm run build",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel-core/register"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -40,9 +38,7 @@
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
     "chai-things": "^0.2.0",
-    "coveralls": "^2.11.9",
     "eslint": "^2.11.1",
-    "lab": "latest",
     "mocha": "^2.3.2"
   },
   "dependencies": {
