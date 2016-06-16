@@ -1,6 +1,6 @@
 {
   "name": "empty-schema",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Generate empty placeholder data from JSON Schemas",
   "main": "lib/index.js",
   "scripts": {
