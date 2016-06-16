@@ -2,7 +2,7 @@
 
 > :crystal_ball: Generate empty placeholder data from JSON Schemas
 
-Generating random data is useful for testing (try out [hazy](https://www.npmjs.com/package/hazy) if you have this need), but developers often require empty placeholder data to work with, particularly when developing web forms.
+Generating random data is useful for testing (try out [JSON Schema Faker](https://www.npmjs.com/package/json-schema-faker) or [hazy](https://www.npmjs.com/package/hazy) if you have this need), but developers often require empty placeholder data to work with, particularly when developing web forms.
 
 The empty data that `empty-schema` generates conforms to the following:
   - Data is generated deterministically. If the schema is the same, the data will be the same.
@@ -83,6 +83,11 @@ console.log(empty(schema))
 
 Whenever specified, `empty-schema` uses the `default` value (even if it
 does not match the schema).
+
+## TODO
+
+- [ ] Lazy and greedy mode (aka "least" and "most")
+- [ ] Integrate `deref`, a more robust `$ref` library (has issues with Hyper-Schema)
 
 ## License
 
