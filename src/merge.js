@@ -4,11 +4,12 @@
  * @param {Array<Object>} schemas JSON Schemas to merge
  * @param Object schema
  */
-export default function merge(schemas) {
-  return schemas
-    .reduce((prev, next) => {
-      return Object.assign(prev, next)
-    }, {})
+
+function merge(schemas) {
+    return schemas.reduce(
+        (prev, next) => Object.assign(prev, next),
+        {}
+    );
 }
 
 export default merge

@@ -4,68 +4,68 @@ import chai  from 'chai'
 chai.should()
 
 // property that describes valid integers
-function valid(min, limit, multipleOf, exclusive) {
-  if (multipleOf === 0) { 
-    return
-  }
+// function valid(min, limit, multipleOf, exclusive) {
+//   if (multipleOf === 0) {
+//     return
+//   }
 
-  min = false
-  // min or max?
-  const ix = min ? 'in' : 'ax'
+//   min = false
+//   // min or max?
+//   const ix = min ? 'in' : 'ax'
 
-  const schema = {
-    type: 'integer',
-    [`m${ix}imum`]: limit,
-    multipleOf,
-    [`exclusiveM${ix}imum`]: exclusive
-  }
+//   const schema = {
+//     type: 'integer',
+//     [`m${ix}imum`]: limit,
+//     multipleOf,
+//     [`exclusiveM${ix}imum`]: exclusive
+//   }
 
-  const gen = empty(schema)
+//   const gen = empty(schema)
 
-  // gen should be multipleOf
-  const multiple = ( gen % multipleOf === 0 )
+//   // gen should be multipleOf
+//   const multiple = ( gen % multipleOf === 0 )
 
-  // gen should comply to limits
-  const small  = min ? limit : gen
-  const big    = min ? gen   : limit
-  const limits = ( small < big ) || ( !exclusive && small <= big )
+//   // gen should comply to limits
+//   const small  = min ? limit : gen
+//   const big    = min ? gen   : limit
+//   const limits = ( small < big ) || ( !exclusive && small <= big )
 
-  const res = multiple && limits
+//   const res = multiple && limits
 
-  if (!res) {
-    console.log(schema, gen, multiple, limits)
-  }
+//   if (!res) {
+//     console.log(schema, gen, multiple, limits)
+//   }
 
-  return res
-}
+//   return res
+// }
 
-function validMinMax([minimum, maximum], exclusiveMinimum, exclusiveMaximum) {
-  // avoid impossible case
-  if (minimum === maximum && (exclusiveMinimum || exclusiveMaximum)) {
-    return undefined
-  }
+// function validMinMax([minimum, maximum], exclusiveMinimum, exclusiveMaximum) {
+//   // avoid impossible case
+//   if (minimum === maximum && (exclusiveMinimum || exclusiveMaximum)) {
+//     return undefined
+//   }
 
-  const schema = {
-    type: 'integer',
-    minimum,
-    maximum,
-    exclusiveMinimum,
-    exclusiveMaximum
-  }
+//   const schema = {
+//     type: 'integer',
+//     minimum,
+//     maximum,
+//     exclusiveMinimum,
+//     exclusiveMaximum
+//   }
 
-  const gen = empty(schema)
+//   const gen = empty(schema)
 
-  const min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum)
-  const max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum)
+//   const min = (gen > minimum) || (!exclusiveMinimum && gen >= minimum)
+//   const max = (gen < maximum) || (!exclusiveMaximum && gen <= maximum)
 
-  const res = min && max
+//   const res = min && max
 
-  if (!res) {
-    console.log(schema, gen, min, max)
-  }
+//   if (!res) {
+//     console.log(schema, gen, min, max)
+//   }
 
-  return res
-}
+//   return res
+// }
 
 
 describe('integers', () => {
