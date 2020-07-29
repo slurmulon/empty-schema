@@ -5,10 +5,8 @@
  * @param Object schema
  */
 export default function merge(schemas) {
-  return schemas
-    .reduce((prev, next) => {
-      return Object.assign(prev, next)
-    }, {})
-}
-
-export default merge
+    return schemas
+      .reduce((prev, next) => {
+        return Object.assign(prev, next)
+      }, {})
+  }
