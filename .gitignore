@@ -1,2 +1,4 @@
 node_modules/
 coverage.html
+yarn.lock
+package-lock.json

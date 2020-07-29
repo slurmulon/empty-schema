@@ -4,12 +4,13 @@
   "description": "Generate empty placeholder data from JSON Schemas",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "build-maps": "babel src --out-dir lib --source-maps",
-    "lint": "eslint src/index.js",
+    "build": "babel src -d lib",
+    "build-maps": "babel src -d lib --source-maps",
+    "lint": "eslint \"@(src|test)/**/*.js\"",
     "start": "babel-node src/index.js",
     "pretest": "npm run build",
-    "test": "mocha --reporter nyan --compilers js:babel-core/register test",
+    "test": "mocha",
+    "test:watch": "mocha --w",
     "auto-start": "nodemon --exec \"npm run lint && npm start\" --ignore public/js",
     "prepublish": "npm run build"
   },
@@ -30,18 +31,23 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.7.5",
-    "babel-plugin-syntax-flow": "^6.5.0",
-    "babel-plugin-transform-flow-strip-types": "^6.7.0",
-    "babel-preset-es2015": "^6.6.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
     "blanket": "^1.2.1",
-    "chai": "^3.2.0",
-    "chai-as-promised": "^5.1.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "chai-things": "^0.2.0",
-    "eslint": "^2.11.1",
-    "mocha": "^2.3.2"
+    "eslint": "^7.5.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mocha-no-only": "^1.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "mocha": "^8.0.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.10.4",
     "simple-json-schema-deref": "^0.1.0"
   }
 }

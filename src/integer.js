@@ -21,7 +21,7 @@ export function minmul(minimum, multipleOf, exclusive) {
 export function maxmul(maximum, multipleOf, exclusive) {
   const res = -minmul(-maximum, multipleOf, exclusive)
 
-  return res === -0 ? 0 : res
+  return res;
 }
 
 export function _integer(schema) {
@@ -36,7 +36,7 @@ export function _integer(schema) {
   const mo = !Object.is(multipleOf, undefined)
   const mi = !Object.is(minimum, undefined)
   const ma = !Object.is(maximum, undefined)
-    
+
   if ( (  mo &&  mi &&  ma ) ||
        ( !mo &&  mi &&  ma ) ) {
     // minimum and maximum
