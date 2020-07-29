@@ -5,7 +5,7 @@
 Generating random data is useful for testing (try out [JSON Schema Faker](https://www.npmjs.com/package/json-schema-faker) or [hazy](https://www.npmjs.com/package/hazy) if you have this need), but developers often require empty placeholder data to work with, particularly when developing web forms.
 
 The empty data that `empty-schema` generates conforms to the following:
-  - Data is generated deterministically. If the schema is the same, the data will be the same.
+  - Data is generated deterministically. If the schema is the same, the data will be the same. Exception is `string` type with date and time related `format` keyword: in this case `new Date().toISOString()` data is used.
   - Data is as simple as possible.
   - Data conforms to the *form* specified in the schema.  It will, however, sometimes fail to be valid according to the schema. The reason for this is simple: you cannot generate all values automatically (see the [rules](#rules) section for more info on this).
 
